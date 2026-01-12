@@ -15,9 +15,18 @@ public class MiniParkingSystem{
 		0. Exit
 		============================================= """;
 
+		String parkingMenu = """
+		=============== PARK CAR ===============
+		1. Automatic Parking
+		2. Manual Parking
+		0. Exit
+		======================================== """;
+
 		boolean isOn = true;
 
 		int[] parkingSlots = new int[20];
+
+		int automaticSlotNumber;
 
 		while(isOn){
 
@@ -30,30 +39,69 @@ public class MiniParkingSystem{
 
 				case 1 -> {
 
-					System.out.println("============ PARK CAR ============");
+					System.out.println(parkingMenu);
 
-					System.out.print("What slot would you like to enter?(1 - 20): ");
-					int parkedSlotNumber = input.nextInt();
+					System.out.print("Enter Option: ");
+					option = input.nextInt();
 
-					if(parkedSlotNumber < 1 || parkedSlotNumber > 20){
+					switch(option){
 
-						System.out.println("No Car Slot!");
+						case 1 -> {
 
-					}else if(parkingSlots[parkedSlotNumber - 1] == 1){
+							System.out.println("============ AUTOMATIC PARKING ============\n");
 
-						System.out.println("Slot Occupied!");
+							automaticSlotNumber = 1;
+
+							automaticParking(parkingSlots, automaticSlotNumber);
+
+							automaticSlotNumber++;
+
+							System.out.println("Car has been successfully parked!!\n");
+
+						}
+
+						case 2 -> {					
+
+							System.out.println("============ MANUAL PARKING ============\n");
+
+							System.out.print("What slot would you like to enter?(1 - 20): ");
+							int parkedSlotNumber = input.nextInt();
+
+							if(parkedSlotNumber < 1 || parkedSlotNumber > 20){
+
+								System.out.println("No Car Slot!");
 	
-					}else{
+							}else if(parkingSlots[parkedSlotNumber - 1] == 1){
 
-					parkingSlots = parkCar(parkingSlots, parkedSlotNumber);
+								System.out.println("Slot Occupied!");
+	
+							}else{
+
+								parkingSlots = parkCar(parkingSlots, parkedSlotNumber);
+
+							}
+
+						}
+
+						case 0 -> {
+
+							System.out.println("EXITING>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+							break;
+
+						}
+
+						default -> {System.out.println("Invalid Option");}
+				
+						
 
 					}
+
 
 				}
 
 				case 2 -> {
 
-					System.out.println("============ REMOVE CAR ============");
+					System.out.println("============ REMOVE CAR ============\n");
 
 					System.out.print("What slot would you like removed?(1 - 20): ");
 					int removedSlotNumber = input.nextInt();
@@ -76,7 +124,7 @@ public class MiniParkingSystem{
 
 				case 3 -> {
 
-					System.out.println("============ PARKING STATUS ============");
+					System.out.println("============ PARKING STATUS ============\n");
 
 					System.out.println("1 = Occupied\n0 = Vacant\n");
 					//System.out.println(Arrays.toString(parkingSlots));
@@ -96,12 +144,12 @@ public class MiniParkingSystem{
 
 				case 0 -> {
 
-					System.out.println("EXITING>>>>>>>>>>>>>>>>>>>>>>>>>>");
+					System.out.println("EXITING>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 					isOn = false;
 
 				}
 
-				default -> {System.out.println("Invalid Option");}
+				default -> {System.out.println("Invalid Option\n");}
 
 			}
 
@@ -152,6 +200,30 @@ public class MiniParkingSystem{
 			if(count == removeIndex){
 
 				arr[count] = 0;
+
+			}
+
+		}
+
+		return arr;
+
+	}
+
+
+	//Automatic Parking
+	public static int[] automaticParking(int[] arr, int parkSlotNumber){
+
+		int parkingIndex = parkSlotNumber - 1;
+
+		for(int count = 0; count < arr.length; count++){
+
+			if(count == parkingIndex && arr[parkingIndex] == 0){
+
+				arr[count] = 1;
+
+			}else if(count == parkingIndex && arr[parkingIndex] == 1){
+
+				parkingIndex++;
 
 			}
 
