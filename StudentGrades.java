@@ -590,12 +590,12 @@ public class StudentGrades{
 	public static int bestGraduatingStudent(int[][] arr){
 		
 		int[] studentRankings = positionOfStudents(arr);
-		int smallest = studentRankings.length + 1;
+		int smallest = 0;
 		int student = 0;
 
 		for(int count = 0; count < studentRankings.length; count++){
 
-			if(studentRankings[count] < smallest){
+			if(studentRankings[count] > smallest){
 
 				smallest = studentRankings[count];
 				student = smallest;
@@ -623,12 +623,12 @@ public class StudentGrades{
 	public static int worstGraduatingStudent(int[][] arr){
 
 		int[] studentRankings = positionOfStudents(arr);
-		int largest = 0;
+		int largest = studentRankings.length + 1;
 		int student = 0;
 
 		for(int count = 0; count < studentRankings.length; count++){
 
-			if(studentRankings[count] > largest){
+			if(studentRankings[count] < largest){
 
 				largest = studentRankings[count];
 				student = largest;
