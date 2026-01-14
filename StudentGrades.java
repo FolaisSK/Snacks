@@ -88,9 +88,9 @@ public class StudentGrades{
 
 			System.out.println("Subject " + subjectCounter);
 			
-			System.out.println("Highest Scoring Student is:	Student " + highestStudent(studentGrades)[subject] + " scoring " + highestStudentScore(studentGrades)[subject]);
+			System.out.println("Highest Scoring Student is: Student " + highestStudent(studentGrades)[subject] + " scoring " + highestStudentScore(studentGrades)[subject]);
 
-			System.out.println("Lowest Scoring Student is:	Student " + lowestStudent(studentGrades)[subject] + " scoring " + lowestStudentScore(studentGrades)[subject]);
+			System.out.println("Lowest Scoring Student is: Student " + lowestStudent(studentGrades)[subject] + " scoring " + lowestStudentScore(studentGrades)[subject]);
 
 			System.out.println("Total Score is: " + totalScoresOfSubjects(studentGrades)[subject]);
 
@@ -121,13 +121,13 @@ public class StudentGrades{
 
 		System.out.println(line);
 
-		System.out.println("Best Graduating Student is: Student " + bestGraduatingStudent(studentGrades) + " scoring " + bestGraduatingTotal(studentGrades));
+		System.out.println("Best Graduating Student is: Student " + bestGradStudent(studentGrades) + " scoring " + bestGradTotal(studentGrades));
 
 		System.out.println(line + "\n\n");
 
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-		System.out.println("Worst Graduating Student is: Student " + worstGraduatingStudent(studentGrades) + " scoring " + worstGraduatingTotal(studentGrades));
+		System.out.println("Worst Graduating Student is: Student " + worstGradStudent(studentGrades) + " scoring " + worstGradTotal(studentGrades));
 
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n");
 
@@ -607,13 +607,58 @@ public class StudentGrades{
 	}
 
 
+	//best graduating student 2
+	public static int bestGradStudent(int[][] arr){
+
+		int[] totalScore =  totalOfScores(arr);
+		int largest = totalScore[0];
+		int student = 0;
+
+		for(int count = 0; count < totalScore.length; count++){
+
+			if(totalScore[count] > largest){
+
+				largest = totalScore[count];
+				student = count + 1;
+
+			}
+
+		}
+
+		return student;
+
+	}
+
+
 	//BGS Total Score
 	public static int bestGraduatingTotal(int[][] arr){
 
 		int[] studentTotals = totalOfScores(arr);
-		int bestStudentIndex = bestGraduatingStudent(arr) - 1;
+		int bestStudentIndex = bestGradStudent(arr) - 1;
 
 		return studentTotals[bestStudentIndex];
+
+	}
+
+
+
+	//best grad student total score
+	public static int bestGradTotal(int[][] arr){
+
+		int[] totals = totalOfScores(arr);
+		int result = 0;
+
+		for(int count = 0; count < totals.length; count++){
+
+			if(count == bestGradStudent(arr) - 1){
+
+				result = totals[count];
+
+			}
+
+		}
+
+		return result;
 
 	}
 
@@ -641,14 +686,58 @@ public class StudentGrades{
 	}
 
 
+	//worst graduating student 2
+	public static int worstGradStudent(int[][] arr){
+
+		int[] totalScore =  totalOfScores(arr);
+		int smallest = totalScore[0];
+		int student = 1;
+
+		for(int count = 0; count < totalScore.length; count++){
+
+			if(totalScore[count] < smallest){
+
+				smallest = totalScore[count];
+				student = count + 1;
+
+			}
+
+		}
+
+		return student;
+
+	}
+
+
 
 	//Worst Graduating Student Total Score
 	public static int worstGraduatingTotal(int[][] arr){
 
 		int[] studentTotals = totalOfScores(arr);
-		int worstStudentIndex = worstGraduatingStudent(arr) - 1;
+		int worstStudentIndex = worstGradStudent(arr) - 1;
 
 		return studentTotals[worstStudentIndex];
+
+	}
+
+
+	//worst grad student total score
+	public static int worstGradTotal(int[][] arr){
+
+		int[] totals = totalOfScores(arr);
+		int result = 0;
+
+		for(int count = 0; count < totals.length; count++){
+
+			if(count == worstGradStudent(arr) - 1){
+
+				result = totals[count];
+
+			}
+
+		}
+
+		return result;
 
 	}
 
