@@ -42,7 +42,7 @@ public class MBTI{
 
 					}else if(userAnswer.equals("B")){
 
-						selectedAnswers[counter][count] = userAnswer + ". " + getAllQuestions()[counter][count][0];
+						selectedAnswers[counter][count] = userAnswer + ". " + getAllQuestions()[counter][count][1];
 						selectedOptions[counter][1] =  ++counterForB;
 						break;
 
